@@ -13,13 +13,14 @@ const Therapist = () => {
       if (data.success) {
         setLoading(false);
         setTherapist(data.allTherapist);
+        console.log(data);
       }
     } catch (e) {
       setLoading(false);
-
       console.log(e);
     }
   };
+
   useEffect(() => {
     document.title = "Therapist Page";
     const descriptionMeta = document.createElement("meta");
@@ -39,6 +40,29 @@ const Therapist = () => {
       document.head.removeChild(keywordsMeta);
     };
   }, []);
+
+  const getFilterBased = async (data1) => {
+    console.log(data1);
+    const { category, language, experience } = data1;
+    try {
+      const config = {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      };
+
+      const { data } = await configuredUrl.get(
+        `/therapist/get-based?language=${language}&category=${category}&experience=${experience}`
+      );
+
+      if (data.success) {
+        setTherapist(data.result);
+        console.log(data);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
   return (
     <>
       {loading ? (
@@ -46,7 +70,7 @@ const Therapist = () => {
       ) : (
         <section className="doctors_container">
           <section className="top1">
-            <Category />
+            <Category getFilterBased={getFilterBased} />
           </section>
           <section className="bottom">
             {therapist &&

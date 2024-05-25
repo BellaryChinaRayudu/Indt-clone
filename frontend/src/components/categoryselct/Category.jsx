@@ -1,13 +1,30 @@
 import "./category.scss";
+import { useState } from "react";
 
-const Category = () => {
+export default function Category({ getFilterBased }) {
+  const [form, setForm] = useState({
+    category: "",
+    language: "",
+    experience: "zero",
+  });
+
+  const onChangeFilter = (e) => {
+    setForm({
+      ...form,
+      [e.target.id]: e.target.value,
+    });
+  };
+
+  const fetchCategory = () => {
+    getFilterBased(form);
+  };
+
   return (
     <>
-      {/* options section */}
       <section className="category_maincontainer">
         <section className="booking-container">
           <label htmlFor="language" className="option">
-            <select id="language">
+            <select id="language" name="language" onChange={onChangeFilter}>
               <option value="lang" class="bold-option">
                 Language
               </option>
@@ -19,7 +36,7 @@ const Category = () => {
           </label>
 
           <label htmlFor="category" className="option">
-            <select id="category">
+            <select id="category" onChange={onChangeFilter}>
               <option value="category" class="bold-option">
                 Category
               </option>
@@ -36,7 +53,7 @@ const Category = () => {
           </label>
 
           <label htmlFor="experience" className="option">
-            <select id="experience">
+            <select id="experience" onChange={onChangeFilter}>
               <option value="expe" class="bold-option">
                 Years of Experience
               </option>
@@ -45,11 +62,12 @@ const Category = () => {
               <option value="three">3 years</option>
             </select>
           </label>
-          <button type="submit">Search</button>
+          <button type="submit" onClick={fetchCategory}>
+            Search
+          </button>
         </section>
         {/* booking button section */}
       </section>
     </>
   );
-};
-export default Category;
+}

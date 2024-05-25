@@ -1,4 +1,5 @@
 import therapistmodel from "../models/therapistSchema.js";
+
 const addTherapist = async (req, res) => {
   try {
     if (!req.isadminOrnot) {
@@ -27,6 +28,7 @@ const addTherapist = async (req, res) => {
         .status(400)
         .send({ message: "data already exists", success: false });
     }
+
     const finalResult = await new therapistmodel({
       name,
       description,
@@ -87,5 +89,48 @@ const getIndividualTherapist = async (req, res) => {
     });
   }
 };
+// get therapist based on condtion
 
-export { addTherapist, getAllTherapists, getIndividualTherapist };
+const getBasedOnCondition = async (req, res) => {
+  const { language, category, experience } = req.query;
+  console.log(language, category, experience);
+
+  if (language === "" && category === "" && experience === "zero") {
+    const allTherapist = await therapistmodel.find();
+    return res.status(200).send({
+      messaage: "data fetched successfully",
+      success: true,
+      allTherapist,
+    });
+  }
+
+  const query_language = language || "";
+  const query_category = category || "";
+  const query_experience = experience || "-1";
+
+  const query = {
+    languages: query_language,
+  };
+
+  try {
+    const result = await therapistmodel.find(query);
+    return res.status(200).send({
+      success: true,
+      message: "Data fetched successfully",
+      result,
+    });
+  } catch (err) {
+    console.log(err.message);
+    return res.status(400).send({
+      success: false,
+      message: err.message,
+    });
+  }
+};
+
+export {
+  addTherapist,
+  getAllTherapists,
+  getIndividualTherapist,
+  getBasedOnCondition,
+};
