@@ -51,17 +51,6 @@ export default function Category({ getFilterBased }) {
               <option value="loneliness">Loneliness</option>
             </select>
           </label>
-
-          <label htmlFor="experience" className="option">
-            <select id="experience" onChange={onChangeFilter}>
-              <option value="expe" class="bold-option">
-                Years of Experience
-              </option>
-              <option value="one">1 year</option>
-              <option value="two">2 years</option>
-              <option value="three">3 years</option>
-            </select>
-          </label>
           <button type="submit" onClick={fetchCategory}>
             Search
           </button>

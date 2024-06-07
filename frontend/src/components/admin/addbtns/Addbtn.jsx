@@ -9,6 +9,9 @@ const Addbtn = () => {
       <Link className="addbtn" to="/add-dietician">
         Add Dietician
       </Link>
+      <Link className="addbtn" to="add-blog">
+        Add New Blog
+      </Link>
     </section>
   );
 };

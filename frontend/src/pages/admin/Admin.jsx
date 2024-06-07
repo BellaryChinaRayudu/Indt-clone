@@ -24,7 +24,6 @@ const Admin = () => {
       console.log(e);
       setLoader(false);
       toast.error("cannot access the admin page");
-
       navigate("/");
     }
   };

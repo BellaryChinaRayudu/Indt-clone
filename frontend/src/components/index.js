@@ -9,3 +9,4 @@ export { default as DoctorCard } from "./doctorcards/DoctorCard";
 export { default as HomeCarousel } from "./carousels/HomeCarousel";
 export { default as Category } from "./categoryselct/Category";
 export { default as Addbtn } from "./admin/addbtns/Addbtn";
+export { default as NewsCard } from "./newscard/Newscard";

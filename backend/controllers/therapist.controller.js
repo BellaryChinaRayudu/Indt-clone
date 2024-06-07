@@ -104,9 +104,9 @@ const getBasedOnCondition = async (req, res) => {
     });
   }
 
-  const query_language = language || "";
+  const query_language = language || "english";
   const query_category = category || "";
-  const query_experience = experience || "-1";
+  const query_experience = experience || "0";
 
   const query = {
     languages: query_language,

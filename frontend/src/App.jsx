@@ -21,6 +21,8 @@ import {
   Termsandcond,
   CancelPayment,
   SuccessPayment,
+  Addblog,
+  Blog,
 } from "./pages";
 import { Addbtn } from "./components";
 
@@ -36,6 +38,7 @@ const App = () => {
               <Route path="admin/*" element={<Admin />}>
                 <Route index element={<Addbtn />} />
                 <Route path="add-therapist" element={<Addtherapist />} />
+                <Route path="add-blog" element={<Addblog />} />
               </Route>
             </Route>
             <Route path="login" element={<Login />} />
@@ -47,6 +50,7 @@ const App = () => {
             <Route path="counseling" element={<Counseling />} />
             <Route path="contact-us" element={<Contact />} />
             <Route path="blogs" element={<Blogs />} />
+            <Route path="blog/:slug" element={<Blog />} />
             <Route path="register" element={<Register />} />
             <Route path="eap" element={<Eap />} />
             <Route path="termsandcond" element={<Termsandcond />} />
