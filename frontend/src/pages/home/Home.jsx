@@ -16,25 +16,36 @@ import {
   HomeCarousel,
   DoctorCard,
 } from "../../components/index";
-import blog01 from "../../assets/images/blog01.jpg";
-import blog02 from "../../assets/images/blog02.jpg";
-import blog03 from "../../assets/images/blog03.jpg";
 import Newscard from "../../components/newscard/Newscard";
 import { SwiperSlide } from "swiper/react";
 import configuredUrl from "../../utils/request/request";
 import Loader from "../../components/loader/Loader";
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
+import BlogsCard from "../../components/blogscards/BlogsCard";
 
 const Home = () => {
   const [therapist, setTherapist] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [news, setNews] = useState(null);
   const getAllTherapist = async () => {
     try {
       const { data } = await configuredUrl.get("/therapist/get-therapist");
       if (data.success) {
         setLoading(false);
         setTherapist(data.allTherapist);
+      }
+    } catch (e) {
+      setLoading(false);
+    }
+  };
+  const getAllNews = async () => {
+    try {
+      const { data } = await configuredUrl.get("/news/getNews");
+      console.log(news);
+      if (data.success) {
+        setLoading(false);
+        setNews(data.news);
       }
     } catch (e) {
       setLoading(false);
@@ -51,11 +62,13 @@ const Home = () => {
       "Online therapy India, therapist directory, mental health support, counseling services, Indian therapists, emotional well-being, therapy sessions, confidential counseling, therapy specialties, mental health resources, virtual therapy sessions, remote counseling, trusted therapists, personal growth, LGBTQ+ affirming therapists";
     document.head.appendChild(descriptionMeta);
     getAllTherapist();
+    getAllNews();
     setLoading(true);
     return () => {
       document.head.removeChild(descriptionMeta);
     };
   }, []);
+  console.log(news);
   return (
     <>
       {loading ? (
@@ -99,7 +112,6 @@ const Home = () => {
                     slidesPerView: 2,
                     spaceBetween: 10,
                   },
-
                   768: {
                     slidesPerView: 2,
                     spaceBetween: 40,
@@ -145,7 +157,6 @@ const Home = () => {
                 </section>
               </section>
             </section>
-
             <section className="img_container">
               <img src="/sec9.jpg" alt="lady" />
             </section>
@@ -191,7 +202,6 @@ const Home = () => {
                     slidesPerView: 2,
                     spaceBetween: 10,
                   },
-
                   768: {
                     slidesPerView: 2,
                     spaceBetween: 40,
@@ -215,14 +225,50 @@ const Home = () => {
             </section>
           </section>
           {/* section 13 */}
+          <section className="section12_container">
+            <section className="section12_heading">
+              <h1 className="main_heading">Blogs</h1>
+            </section>
+            <section className="section12_content">
+              <HomeCarousel
+                spaceBetween={30}
+                slidesPerView={1}
+                breakpoints={{
+                  500: {
+                    slidesPerView: 2,
+                    spaceBetween: 10,
+                  },
+
+                  768: {
+                    slidesPerView: 2,
+                    spaceBetween: 40,
+                  },
+                  1024: {
+                    slidesPerView: 3,
+                    spaceBetween: 20,
+                  },
+                  1200: {
+                    slidesPerView: 4,
+                    spaceBetween: 20,
+                  },
+                }}
+              >
+                {news?.map((item, ind) => (
+                  <SwiperSlide key={ind}>
+                    <BlogsCard item={item} />
+                  </SwiperSlide>
+                ))}
+              </HomeCarousel>
+            </section>
+          </section>
           <section className="section13_container">
             <section className="left">
               <img src="https://media.istockphoto.com/id/1134890323/photo/woman-using-smartphone-the-concept-of-using-the-phone-is-essential-in-everyday-life.webp?b=1&s=170667a&w=0&k=20&c=Y-seAx-M62ly0f29GuKXvFYrRCVvPnl8MFwYSK5s1DU=" />
             </section>
             <section className="right">
               <h3>
-                “ If You are in Trouble Need our Help, Contact Us Immediately,
-                We are Support 24/7 ”
+                “If You are in Trouble Need our Help, Contact Us Immediately, We
+                are Support 24/7”
               </h3>
               <section className="right_bottom_container">
                 <Link to="/contact-us">
@@ -232,46 +278,14 @@ const Home = () => {
                   <RoundIcon icn={<FaPhoneAlt />} bg={" --icon-bg"} />
                   <section className="contact_content">
                     <p className="dial">Dial Now</p>
-                    <a href="tel: +91 9384838353"> 9384838353</a>
+                    <a href="tel: +91 9384838353">9384838353</a>
                   </section>
                 </section>
               </section>
             </section>
           </section>
           {/* Section 14 */}
-          <div className="section14_container">
-            <div className="heading_14">
-              <div className="title">FROM THE BLOG</div>
-              <div className="subtitle_large">News and Articles</div>
-            </div>
-            <div className="card_section">
-              <Newscard
-                className="card"
-                img={blog01}
-                title="Blog 01"
-                author="Admin"
-                date="17"
-                month="Sept"
-                newstitle="Lorem ipsum dolor sit amet, consectetur adipisicing elit."
-              />
-              <Newscard
-                img={blog02}
-                title="Blog 01"
-                author="Admin"
-                date="17"
-                month="Sept"
-                newstitle="Lorem ipsum dolor sit amet, consectetur adipisicing elit."
-              />
-              <Newscard
-                img={blog03}
-                title="Blog 01"
-                author="Admin"
-                date="17"
-                month="Sept"
-                newstitle="Lorem ipsum dolor sit amet, consectetur adipisicing elit."
-              />
-            </div>
-          </div>
+          <div className="section14_container"></div>
           {/* Section 15 */}
           <section className="section15_container">
             <div className="heading15">

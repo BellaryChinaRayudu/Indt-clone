@@ -7,13 +7,16 @@
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 0 40px rgb(0 0 0 / 10%);
-  width: 450px;
+  width: 350px;
   margin-top: 10px;
+  height: 473px;
+  overflow: hidden;
+  margin-bottom: 10px;
 
   .img {
     background-color: var(--black);
     overflow: hidden;
-    height: 90%;
+    height: 40%;
 
     img {
       width: 100%;
@@ -76,4 +79,14 @@
       font-weight: 400;
     }
   }
+}
+.content{
+  height: 60%;
+  gap: 10px;
+  text-align: left;
+}
+.creds{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }

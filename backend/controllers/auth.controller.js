@@ -33,7 +33,6 @@ const loginController = async (req, res) => {
     const expiryDate = new Date();
     expiryDate.setFullYear(expiryDate.getFullYear() + 1);
     return res
-
       .cookie("accessToken", token, { httpOnly: true, expires: expiryDate })
       .status(200)
       .send({

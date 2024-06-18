@@ -1,24 +1,19 @@
 import React from "react";
 import "./newscard.scss";
-function Newscard({ img, title, author, date, month, news, newstitle }) {
+import { Link } from "react-router-dom";
+
+const Newscard = ({ item }) => {
+  console.log(item, "Yes");
   return (
-    <>
+    <Link to={`/blog?slug=${item.slug}`}>
       <div className="outer_card">
-        <div className="img">
-          <img src={img} alt={title} />
-        </div>
-        <div className="card-date">
-          <div className="number">{date}</div>
-          <div className="month">{month}</div>
-        </div>
-        <div className="author">
-          By
-          <a href="#">{author}</a>
-        </div>
-        <div className="card_title">{newstitle}</div>
+        <img src={item?.imageUrl} alt={item?.title} />
+        <h1>{item.title}</h1>
+        <h3>{item.content}</h3>
+        <h2>By {item.author}</h2>
       </div>
-    </>
+    </Link>
   );
-}
+};
 
 export default Newscard;

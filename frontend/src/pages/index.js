@@ -15,6 +15,8 @@ import Addtherapist from "./addtherapist/Addtherapist";
 import Termsandcond from "./termsandcond/Termsandcond";
 import SuccessPayment from "./successpayment/SuccessPayment";
 import CancelPayment from "./cancelpayment/CancelPayment";
+import Addblog from "./addblogs/Addblog";
+import Blog from "./Blog/Blog";
 export {
   Home,
   Parent,
@@ -33,4 +35,6 @@ export {
   Addtherapist,
   SuccessPayment,
   Termsandcond,
+  Addblog,
+  Blog,
 };
